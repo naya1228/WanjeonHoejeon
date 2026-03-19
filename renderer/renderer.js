@@ -9,7 +9,7 @@ const blockedMsg = document.getElementById('blocked-msg');
 const stage      = document.getElementById('stage');
 
 let loadedUrl = ''; // 현재 로드된 URL 추적
-let isPaused = false;
+let isPaused = true;
 
 // ── webview 이벤트 ──
 // did-start-loading에서 차단 메시지를 즉시 숨겨 로드 중 깜빡임 방지
@@ -41,6 +41,7 @@ function handleBtn() {
     frame.src = url;
     frame.classList.add('interactive');
     isPaused = false;
+    dragWrapper.classList.add('loaded');
     spinX.classList.remove('paused');
     spinY.classList.remove('paused');
     spinTarget.classList.remove('paused');
