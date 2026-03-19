@@ -39,7 +39,7 @@ header h1 {
 
 header p {
   font-size: 0.65rem;
-  color: var(--gold-deep);
+  color: var(--text);
   letter-spacing: 0.3em;
   margin-top: 0.15rem;
 }
@@ -153,7 +153,7 @@ webview.interactive { pointer-events: auto; }
   border-radius: 4px;
 }
 #blocked-msg.show { display: flex; }
-#blocked-msg small { font-family: 'Noto Serif KR', serif; font-size: 0.75rem; color: var(--gold-deep); }
+#blocked-msg small { font-family: 'Noto Serif KR', serif; font-size: 0.75rem; color: var(--text); }
 
 /* ── 힌트 ── */
 #hint {
@@ -162,7 +162,7 @@ webview.interactive { pointer-events: auto; }
   left: 50%;
   translate: -50% 0;
   font-size: 0.7rem;
-  color: var(--gold-deep);
+  color: var(--text);
   letter-spacing: 0.15em;
   pointer-events: none;
   user-select: none;
