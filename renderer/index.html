@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>완전한 황금의 회전 에너지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>완전한 황금의 회전 에너지</h1>
+    <p>WANJEON HOEJEON</p>
+  </header>
+
+  <div class="control">
+    <input type="url" id="url-input" placeholder="https://..." />
+    <button class="btn" id="load-btn">회전 시작</button>
+  </div>
+
+  <div class="stage" id="stage">
+    <div id="drag-wrapper">
+      <div id="spin-target">
+        <webview id="frame" src="about:blank" allowpopups disablewebsecurity></webview>
+        <div id="blocked-msg">
+          <span>이 사이트는 회전을 거부했다</span>
+          <small>This site refused to spin.</small>
+        </div>
+      </div>
+    </div>
+    <div id="hint">DRAG TO THROW &nbsp;·&nbsp; DBLCLICK = 중앙 복귀 &nbsp;·&nbsp; SPACE = 정지 / 재개</div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
