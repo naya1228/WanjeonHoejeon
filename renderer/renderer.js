@@ -1,12 +1,15 @@
 const urlInput   = document.getElementById('url-input');
 const loadBtn    = document.getElementById('load-btn');
 const dragWrapper= document.getElementById('drag-wrapper');
+const spinX      = document.getElementById('spin-x');
+const spinY      = document.getElementById('spin-y');
 const spinTarget = document.getElementById('spin-target');
 const frame      = document.getElementById('frame');
 const blockedMsg = document.getElementById('blocked-msg');
 const stage      = document.getElementById('stage');
 
 let loadedUrl = ''; // 현재 로드된 URL 추적
+let isPaused = false;
 
 // ── webview 이벤트 ──
 // did-start-loading에서 차단 메시지를 즉시 숨겨 로드 중 깜빡임 방지
@@ -37,7 +40,11 @@ function handleBtn() {
     loadedUrl = url;
     frame.src = url;
     frame.classList.add('interactive');
+    isPaused = false;
+    spinX.classList.remove('paused');
+    spinY.classList.remove('paused');
     spinTarget.classList.remove('paused');
+    dragWrapper.classList.add('square');
     loadBtn.textContent = '회전 정지';
     loadBtn.classList.remove('active');
   } else {
@@ -46,9 +53,25 @@ function handleBtn() {
 }
 
 function toggleSpin() {
-  const paused = spinTarget.classList.toggle('paused');
-  loadBtn.textContent = paused ? '회전 재개' : '회전 정지';
-  loadBtn.classList.toggle('active', paused);
+  isPaused = !isPaused;
+
+  if (isPaused) {
+    // 현재 위치에서 freeze → 다음 프레임에 animation 제거 + 0으로 트랜지션
+    [spinX, spinY, spinTarget].forEach(el => el.style.animationPlayState = 'paused');
+    requestAnimationFrame(() => {
+      [spinX, spinY, spinTarget].forEach(el => {
+        el.style.animationPlayState = '';
+        el.classList.add('paused');
+      });
+      dragWrapper.classList.remove('square');
+    });
+  } else {
+    [spinX, spinY, spinTarget].forEach(el => el.classList.remove('paused'));
+    dragWrapper.classList.add('square');
+  }
+
+  loadBtn.textContent = isPaused ? '회전 재개' : '회전 정지';
+  loadBtn.classList.toggle('active', isPaused);
 }
 
 // ── 드래그 & 던지기 ──
